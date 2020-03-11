@@ -52,4 +52,20 @@ public class CricketAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void checkMethodForMaxSixesAndFoursWithBestStrikeRates() {
+        try {
+            IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
+            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS);
+            IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
+            Assert.assertEquals("Andre Russell", iplCSV[0].player);
+        }catch (IPLAnalyserException e){
+            System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

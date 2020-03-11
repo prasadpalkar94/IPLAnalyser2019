@@ -29,8 +29,14 @@ public class IPL2019Analyser {
         this.sortMap.put(SortFieldBat.STRIKE_RATES, Comparator.comparing(ipl -> ipl.strikeRates));
         this.sortMap.put(SortFieldBat.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes+ipl.fours));
 
+        Comparator<IPLCSVDTO> iplComparator = Comparator.comparing(ipl -> ipl.sixes+ipl.fours);
+        this.sortMap.put(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS, iplComparator.thenComparing(ipl ->ipl.strikeRates));
+
     }
 
+//    public String getSort(SortFieldBat field) throws IPLAnalyserException{
+//
+//    }
 
     public String getSortedData(SortFieldBat field) throws IPLAnalyserException {
         if (iplList == null || iplList.size() == 0) {
