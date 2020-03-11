@@ -42,6 +42,10 @@ public class IPL2019Analyser {
 
         this.sortMap.put(SortField.BEST_AVERAGE_WITH_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
 
+        Comparator<IPLCSVDTO> iplComparator2 = Comparator.comparing(ipl -> ipl.wickets);
+        this.sortMap.put(SortField.MAX_WICKETS_AND_BEST_AVERAGE, iplComparator2.thenComparing(ipl ->ipl.averages));
+
+
 
     }
 

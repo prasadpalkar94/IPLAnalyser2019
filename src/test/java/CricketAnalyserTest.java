@@ -186,6 +186,21 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC12
+    @Test
+    public void MaxWicketsANDBestBowlingAverage() {
+        try {
+            IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BOWLER, IPL_CRICKET_WICKETS_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.MAX_WICKETS_AND_BEST_AVERAGE);
+            IPL2019BOWLERSCSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019BOWLERSCSV[].class);
+            Assert.assertEquals("Imran Tahir",iplCSV[0].player);
+        }catch (IPLAnalyserException e){
+            System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
