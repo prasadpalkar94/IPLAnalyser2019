@@ -40,6 +40,7 @@ public class IPL2019Analyser {
         Comparator<IPLCSVDTO> iplComparator1 = Comparator.comparing(ipl -> ipl.fiveWickets+ipl.fourWickets);
         this.sortMap.put(SortField.BEST_STRIKE_RATES_WITH_5WICKETS_AND_4WICKETS, iplComparator1.thenComparing(ipl ->ipl.strikeRates));
 
+        this.sortMap.put(SortField.BEST_AVERAGE_WITH_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
 
 
     }
