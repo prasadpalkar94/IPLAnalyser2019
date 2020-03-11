@@ -26,6 +26,7 @@ public class IPL2019Analyser {
     public IPL2019Analyser(){
         this.sortMap = new HashMap<>();
         this.sortMap.put(SortFieldBat.AVERAGE, Comparator.comparing(ipl -> ipl.averages));
+        this.sortMap.put(SortFieldBat.STRIKE_RATES, Comparator.comparing(ipl -> ipl.strikeRates));
     }
 
 
