@@ -35,6 +35,11 @@ public class IPL2019Analyser {
         this.sortMap.put(SortField.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
         this.sortMap.put(SortField.BEST_RUN_AND_AVERAGES, Comparator.comparing(ipl -> ipl.runs+ipl.averages));
 
+        this.sortMap.put(SortField.ECONOMY_RATES, Comparator.comparing(ipl -> ipl.economyRates));
+
+        Comparator<IPLCSVDTO> iplComparator1 = Comparator.comparing(ipl -> ipl.fiveWickets+ipl.fourWickets);
+        this.sortMap.put(SortField.BEST_STRIKE_RATES_WITH_5WICKETS_AND_4WICKETS, iplComparator1.thenComparing(ipl ->ipl.strikeRates));
+
 
 
     }

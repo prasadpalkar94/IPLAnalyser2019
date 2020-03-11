@@ -1,6 +1,11 @@
-.idea
+.idea/*
+.bat
 *.iws
 *.iml
 *.ipr
-*build/
+build/*
+gradle/*
+gradlew
 .gradle
+
+
