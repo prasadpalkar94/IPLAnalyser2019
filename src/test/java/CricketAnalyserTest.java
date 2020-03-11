@@ -8,6 +8,7 @@ public class CricketAnalyserTest {
     private static final String INDIA_CRICKET_RUN_CSV_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_CRICKET_WICKETS_CSV_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostWkts.csv";
 
+    //UC1
     @Test
     public void givenmethodToCheckTopBattingAverage() {
         try {
@@ -23,6 +24,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC2
     @Test
     public void givenmethodToCheckToStrikesRate() {
         try {
@@ -38,6 +40,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC3
     @Test
     public void checkMethodForMaximumSixesAndFours() {
         try {
@@ -53,6 +56,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC4
     @Test
     public void checkMethodForMaxSixesAndFoursWithBestStrikeRates() {
         try {
@@ -68,6 +72,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC5
     @Test
     public void checkMethodForBestAveragesAndBestStrikeRates() {
         try {
@@ -83,6 +88,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC6
     @Test
     public void checkMethodForMaxRUNSAndBestStrikeRates() {
         try {
@@ -98,6 +104,7 @@ public class CricketAnalyserTest {
         }
     }
 
+    //UC7
     @Test
     public void checkMethodForTopBowlingAverage() {
         try {
@@ -112,6 +119,22 @@ public class CricketAnalyserTest {
             e.printStackTrace();
         }
     }
+    
+    //UC8
 
 
+    @Test
+    public void checkMethodForTopStrikeRatesBowling() {
+        try {
+            IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BOWLER, IPL_CRICKET_WICKETS_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.STRIKE_RATES);
+            IPL2019BOWLERSCSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019BOWLERSCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham",iplCSV[0].player);
+        }catch (IPLAnalyserException e){
+            System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

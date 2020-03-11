@@ -35,7 +35,7 @@ public class IPL2019Analyser {
         this.sortMap.put(SortField.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
         this.sortMap.put(SortField.BEST_RUN_AND_AVERAGES, Comparator.comparing(ipl -> ipl.runs+ipl.averages));
 
-        this.sortMap.put(SortField.AVERAGE,Comparator.comparing(ipl -> ipl.averages));
+
 
     }
 
