@@ -33,11 +33,10 @@ public class IPL2019Analyser {
         this.sortMap.put(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS, iplComparator.thenComparing(ipl ->ipl.strikeRates));
 
         this.sortMap.put(SortFieldBat.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
+        this.sortMap.put(SortFieldBat.BEST_RUN_AND_AVERAGES, Comparator.comparing(ipl -> ipl.runs+ipl.averages));
+
     }
 
-//    public String getSort(SortFieldBat field) throws IPLAnalyserException{
-//
-//    }
 
     public String getSortedData(SortFieldBat field) throws IPLAnalyserException {
         if (iplList == null || iplList.size() == 0) {

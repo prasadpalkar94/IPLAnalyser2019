@@ -83,5 +83,20 @@ public class CricketAnalyserTest {
         }
     }
 
+    @Test
+    public void checkMethodForMaxRUNSAndBestStrikeRates() {
+        try {
+            IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
+            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.BEST_RUN_AND_AVERAGES);
+            IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
+            Assert.assertEquals("David Warner", iplCSV[0].player);
+        }catch (IPLAnalyserException e){
+            System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
