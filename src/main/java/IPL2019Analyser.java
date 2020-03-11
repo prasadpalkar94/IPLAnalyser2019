@@ -13,9 +13,9 @@ public class IPL2019Analyser {
     }
     List<IPLCSVDTO> iplList = null;
     Map<String, IPLCSVDTO> iplMap = null;
-    Map<SortFieldBat, Comparator<IPLCSVDTO>> sortMap = null;
+    Map<SortField, Comparator<IPLCSVDTO>> sortMap = null;
 
-    public int loadMostRunData(Player player, String... csvFilePath) throws IPLAnalyserException, IOException {
+    public int loadData(Player player, String... csvFilePath) throws IPLAnalyserException, IOException {
         iplMap = new IPLAdapterFactory().getIPLAdapter(player,csvFilePath);
         iplList = new ArrayList<>(iplMap.values());
         return iplMap.size();
@@ -25,20 +25,22 @@ public class IPL2019Analyser {
 
     public IPL2019Analyser(){
         this.sortMap = new HashMap<>();
-        this.sortMap.put(SortFieldBat.AVERAGE, Comparator.comparing(ipl -> ipl.averages));
-        this.sortMap.put(SortFieldBat.STRIKE_RATES, Comparator.comparing(ipl -> ipl.strikeRates));
-        this.sortMap.put(SortFieldBat.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes+ipl.fours));
+        this.sortMap.put(SortField.AVERAGE, Comparator.comparing(ipl -> ipl.averages));
+        this.sortMap.put(SortField.STRIKE_RATES, Comparator.comparing(ipl -> ipl.strikeRates));
+        this.sortMap.put(SortField.SIXES_AND_FOURS, Comparator.comparing(ipl -> ipl.sixes+ipl.fours));
 
         Comparator<IPLCSVDTO> iplComparator = Comparator.comparing(ipl -> ipl.sixes+ipl.fours);
-        this.sortMap.put(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS, iplComparator.thenComparing(ipl ->ipl.strikeRates));
+        this.sortMap.put(SortField.STRIKE_RATES_WITH_SIXES_AND_FOURS, iplComparator.thenComparing(ipl ->ipl.strikeRates));
 
-        this.sortMap.put(SortFieldBat.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
-        this.sortMap.put(SortFieldBat.BEST_RUN_AND_AVERAGES, Comparator.comparing(ipl -> ipl.runs+ipl.averages));
+        this.sortMap.put(SortField.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
+        this.sortMap.put(SortField.BEST_RUN_AND_AVERAGES, Comparator.comparing(ipl -> ipl.runs+ipl.averages));
+
+        this.sortMap.put(SortField.AVERAGE,Comparator.comparing(ipl -> ipl.averages));
 
     }
 
 
-    public String getSortedData(SortFieldBat field) throws IPLAnalyserException {
+    public String getSortedData(SortField field) throws IPLAnalyserException {
         if (iplList == null || iplList.size() == 0) {
             throw new IPLAnalyserException("Census_Data_Issue",
                     IPLAnalyserException.ExceptionType.IPL_DATA_PROBLEM);
@@ -48,7 +50,6 @@ public class IPL2019Analyser {
         String sorted = new Gson().toJson(iplList);
         return sorted;
     }
-
 
     private void sort(List<IPLCSVDTO> iplList, Comparator<IPLCSVDTO> iplComparator) {
         for (int i = 0; i < iplList.size() - 1; i++) {

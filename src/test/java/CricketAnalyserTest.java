@@ -12,8 +12,8 @@ public class CricketAnalyserTest {
     public void givenmethodToCheckTopBattingAverage() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.AVERAGE);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.AVERAGE);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("MS Dhoni", iplCSV[0].player);
         }catch (IPLAnalyserException e){
@@ -27,8 +27,8 @@ public class CricketAnalyserTest {
     public void givenmethodToCheckToStrikesRate() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.STRIKE_RATES);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.STRIKE_RATES);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("Ishant Sharma", iplCSV[0].player);
         }catch (IPLAnalyserException e){
@@ -42,8 +42,8 @@ public class CricketAnalyserTest {
     public void checkMethodForMaximumSixesAndFours() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.SIXES_AND_FOURS);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.SIXES_AND_FOURS);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("Andre Russell", iplCSV[0].player);
         }catch (IPLAnalyserException e){
@@ -57,8 +57,8 @@ public class CricketAnalyserTest {
     public void checkMethodForMaxSixesAndFoursWithBestStrikeRates() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.STRIKE_RATES_WITH_SIXES_AND_FOURS);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("Andre Russell", iplCSV[0].player);
         }catch (IPLAnalyserException e){
@@ -72,8 +72,8 @@ public class CricketAnalyserTest {
     public void checkMethodForBestAveragesAndBestStrikeRates() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.BEST_AVERAGE_AND_STRIKE_RATES);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.BEST_AVERAGE_AND_STRIKE_RATES);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("Ishant Sharma", iplCSV[0].player);
         }catch (IPLAnalyserException e){
@@ -87,10 +87,25 @@ public class CricketAnalyserTest {
     public void checkMethodForMaxRUNSAndBestStrikeRates() {
         try {
             IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
-            ipl2019Analyser.loadMostRunData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
-            String checkPlayer = ipl2019Analyser.getSortedData(SortFieldBat.BEST_RUN_AND_AVERAGES);
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BATSMAN, INDIA_CRICKET_RUN_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.BEST_RUN_AND_AVERAGES);
             IPL2019CSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019CSV[].class);
             Assert.assertEquals("David Warner", iplCSV[0].player);
+        }catch (IPLAnalyserException e){
+            System.out.println(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void checkMethodForTopBowlingAverage() {
+        try {
+            IPL2019Analyser ipl2019Analyser = new IPL2019Analyser();
+            ipl2019Analyser.loadData(IPL2019Analyser.Player.BOWLER, IPL_CRICKET_WICKETS_CSV_FILE_PATH);
+            String checkPlayer = ipl2019Analyser.getSortedData(SortField.AVERAGE);
+            IPL2019BOWLERSCSV[] iplCSV = new Gson().fromJson(checkPlayer, IPL2019BOWLERSCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham",iplCSV[0].player);
         }catch (IPLAnalyserException e){
             System.out.println(e);
         } catch (IOException e) {
