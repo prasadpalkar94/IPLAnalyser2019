@@ -18,10 +18,10 @@ public abstract class IPLAdapter {
         Map<String, IPLCSVDTO> iplMap= new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVInterface csvBuilder= CSVBuilderFactory.createCSVBuilder();
-            Iterator<E> censusCSVIterator=csvBuilder.getStateCSVIterator(reader,iplCSVClass);
-            Iterable<E> csvIterable = () -> censusCSVIterator;
+            Iterator<E> Iterator=csvBuilder.getStateCSVIterator(reader,iplCSVClass);
+            Iterable<E> Iterable = () -> Iterator;
             if(iplCSVClass.getName().equals("IPL2019CSV")) {
-                StreamSupport.stream(csvIterable.spliterator(), false)
+                StreamSupport.stream(Iterable.spliterator(), false)
                         .map(IPL2019CSV.class::cast)
                         .forEach(batsman -> iplMap.put(batsman.player, new IPLCSVDTO(batsman)));
             }
