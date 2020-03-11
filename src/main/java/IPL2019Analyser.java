@@ -32,6 +32,7 @@ public class IPL2019Analyser {
         Comparator<IPLCSVDTO> iplComparator = Comparator.comparing(ipl -> ipl.sixes+ipl.fours);
         this.sortMap.put(SortFieldBat.STRIKE_RATES_WITH_SIXES_AND_FOURS, iplComparator.thenComparing(ipl ->ipl.strikeRates));
 
+        this.sortMap.put(SortFieldBat.BEST_AVERAGE_AND_STRIKE_RATES, Comparator.comparing(ipl -> ipl.averages+ipl.strikeRates));
     }
 
 //    public String getSort(SortFieldBat field) throws IPLAnalyserException{
